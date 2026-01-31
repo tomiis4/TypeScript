@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+$bg: #38363F;
+$text: #EAE9FC;
+$primary: #F5926B;
+$secondary: #94B5C2;
+$accent: #ECEFC8;
+
+$warning: #E66B6B;
+$succes: #88B39A;
+
+
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $bg;
+}
+
+p, h1, h2, h3, h4, h5 {
+  color: $text;
+}
+
