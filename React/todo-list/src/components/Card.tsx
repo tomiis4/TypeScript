@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import "./card.scss";
 
-const Card = ({ text, color }: { text: string, color: string }) => {
+const Card = ({ value, color, id, closeF }: { value: string, color: string, id:number, closeF: (arg0:number) => void }) => {
     const [isActive, setIsActive] = useState(true);
 
     const click = () => {
@@ -8,10 +10,15 @@ const Card = ({ text, color }: { text: string, color: string }) => {
     }
 
     return <>
-        <div className={isActive ? "" : "not-active"} onClick={click}>
-            <div style={{ background: color }} />
-            <h3> {text} </h3>
-            <img src="" />
+        <div className={isActive ? "card" : "card not-active"} onClick={click}>
+            <div className={"clr"} style={{ background: color }} />
+            <h3> <span>{value}</span> </h3>
+            <IoMdCloseCircleOutline
+                color={"#ECEFC8"} 
+                fontSize={"35px"} 
+                className={"ico"} 
+                onClick={() => closeF(id)!} 
+            />
         </div>
     </>;
 }

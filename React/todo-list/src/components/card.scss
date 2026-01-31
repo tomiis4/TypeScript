@@ -1,0 +1,56 @@
+@import "../index.scss";
+
+.card {
+  width: 90%;
+  aspect-ratio: 19/3;
+
+  cursor: pointer;
+  transition: 200ms;
+
+  border-radius: 8px;
+  border: 2px solid $text-20;
+  background: $secondary-10;
+
+  display: flex;
+  align-items: center;
+
+  .clr {
+    height: 80%;
+    width: 3%;
+    border-radius: 1000px;
+    position: relative;
+    margin: 0 15px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .ico {
+    margin-left: auto;
+    margin-right: 15px;
+  }
+}
+
+.not-active {
+  background: $primary-10;
+
+  .clr {
+    transition: 200ms;
+    opacity: 0.65;
+  }
+
+  h3 {
+    transition: 200ms;
+    opacity: 0.65;
+    span {
+      opacity: 0.65;
+      text-decoration: line-through;
+    } 
+  }
+  
+  .ico {
+    transition: 200ms;
+    opacity: 0.65;
+  }
+}
