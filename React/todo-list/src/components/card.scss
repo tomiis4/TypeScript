@@ -1,4 +1,4 @@
-@import "../index.scss";
+@use "../index.scss";
 
 .card {
   width: 90%;
@@ -8,8 +8,8 @@
   transition: 200ms;
 
   border-radius: 8px;
-  border: 2px solid $text-20;
-  background: $secondary-10;
+  border: 2px solid index.$text-20;
+  background: index.$secondary-10;
 
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .not-active {
-  background: $primary-10;
+  background: index.$primary-10;
 
   .clr {
     transition: 200ms;

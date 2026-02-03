@@ -1,4 +1,4 @@
-@import "../index.scss";
+@use "../index.scss";
 
 .inputs {
   margin-top: 15%;
@@ -13,7 +13,7 @@ input {
   transition: 200ms;
 
   border-radius: 8px;
-  border: 2px solid $text-20;
+  border: 2px solid index.$text-20;
   font-size: 1.5rem;
   outline: none;
   padding: 5px;
@@ -22,13 +22,13 @@ input {
 input[type=text] {
   width: 50%;
   padding-left: 20px;
-  background: $secondary-10;
-  color: $text;
+  background: index.$secondary-10;
+  color: index.$text;
 }
 
 input[type=button] {
-  background: $secondary;
-  color: $bg;
+  background: index.$secondary;
+  color: index.$bg;
   font-weight: bold;
   padding: 0 20px;
   box-shadow: 4px 4px 5px 5px rgba(0,0,0,0.25);
