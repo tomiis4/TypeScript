@@ -18,7 +18,7 @@ function App() {
     const [inputData, setInputData] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
-    // useEffect(() => { console.log(data); }, [data]) // useEffect(() => { }, [data])
+    // useEffect(() => { }, [data])
 
 
     const addHandler = () => {
