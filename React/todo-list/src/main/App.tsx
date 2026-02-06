@@ -25,7 +25,7 @@ function App() {
 
     const addHandler = () => {
         const color = randomColor();
-        const id = data.length
+        const id = Date.now(); 
 
         db.addCard(id, inputData, color, true);
 
