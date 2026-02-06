@@ -12,9 +12,6 @@ class Database extends Dexie {
     cards!: EntityTable<Card, "id">;
     constructor() {
         super("CardDb");
-        // this.db = new Dexie("CardDb") as Dexie & {
-        //     // @ts-ignore
-        // };
 
         this.version(1).stores({
             // tables (++id to automatically increment)
@@ -44,15 +41,8 @@ class Database extends Dexie {
             isActive: isActive,
         })
     }
-
-    // getDb = () => {
-    //     // const cards = useLiveQuery(() => this.cards.toArray());
-    //     const cards = []
-    //
-    //     return cards;
-    // }
 }
 
 const db = new Database();
 
-export { db };
+export { db, type Card };

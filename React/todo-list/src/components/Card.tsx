@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import type { Card as CardType } from "./Db";
 import "./card.scss";
 
-type Props = {
-    id: number,
-    value: string,
-    color: string,
-    isActive: boolean,
+interface Props extends CardType {
     deleteCallback: (arg0: number) => void,
     activityCallback: (arg0: number, arg1: boolean) => void
 }

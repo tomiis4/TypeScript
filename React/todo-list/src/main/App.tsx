@@ -2,29 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import './App.scss'
 import Card from '../components/Card'
 import { db } from '../components/Db'
+import type { Card as CardType } from '../components/Db'
 import { useLiveQuery } from 'dexie-react-hooks'
 
-type Data = {
-    value: string
-    id: number
-    color: string
-    isActive: boolean
-}
 
 function randomColor() {
     return `#${[0, 0, 0].map(() => Math.floor(Math.random() * 128 + 127).toString(16).padStart(2, '0')).join('')}`;
 }
 
 function App() {
-    const [data, setData] = useState<Data[]>([]);
+    const [data, setData] = useState<CardType[]>([]);
     const [inputData, setInputData] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
     const cards = useLiveQuery(() => db.cards.toArray());
-
-    // updateCardActivity
-    // addCard
-    // deleteCard
-    // getCards
 
     useEffect(() => {
         if (data.length == 0 && cards) {
@@ -63,8 +53,8 @@ function App() {
         db.updateCardActivity(id, isActive);
     }
 
-    const deleteItem = (id: number) => { 
-        setData(prevData => prevData.filter(item => item.id !== id)); 
+    const deleteItem = (id: number) => {
+        setData(prevData => prevData.filter(item => item.id !== id));
         db.deleteCard(id);
     }
 
