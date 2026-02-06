@@ -3,23 +3,24 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import "./card.scss";
 
 type Props = {
+    id: number,
     value: string,
     color: string,
-    id: number,
+    isActive: boolean,
     deleteCallback: (arg0: number) => void,
     activityCallback: (arg0: number, arg1: boolean) => void
 }
 
-const Card = ({ value, color, id, deleteCallback, activityCallback }: Props) => {
-    const [isActive, setIsActive] = useState(true);
+const Card = ({ id, value, color, isActive, deleteCallback, activityCallback }: Props) => {
+    const [isActiveClass, setIsActiveClass] = useState(isActive);
 
     const activeHandler = () => {
-        activityCallback(id, !isActive);
-        setIsActive(!isActive);
+        activityCallback(id, !isActiveClass);
+        setIsActiveClass(!isActiveClass);
     }
 
     return <>
-        <div className={isActive ? "card" : "card not-active"} onClick={activeHandler}>
+        <div className={isActiveClass ? "card" : "card not-active"} onClick={activeHandler}>
             <div className={"clr"} style={{ background: color }} />
             <h3> <span>{value}</span> </h3>
             <IoMdCloseCircleOutline
@@ -27,7 +28,7 @@ const Card = ({ value, color, id, deleteCallback, activityCallback }: Props) => 
                 fontSize={"35px"}
                 className={"ico"}
                 onClick={(e) => {
-                    e.stopPropagation(); 
+                    e.stopPropagation();
                     deleteCallback(id);
                 }}
             />

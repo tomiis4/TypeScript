@@ -1,48 +1,58 @@
 import { Dexie } from 'dexie';
-import type EntityTable from 'dexie';
-import { useLiveQuery } from 'dexie-react-hooks';
+import type { EntityTable } from 'dexie';
 
-// Typing for your entities (hint is to move this to its own module)
-export interface Friend {
+interface Card {
     id: number;
-    name: string;
-    age: number;
+    value: string;
+    color: string;
+    isActive: boolean;
 }
 
-// Database declaration (move this to its own module also)
-export const db = new Dexie('FriendDatabase') as Dexie & {
-    friends: EntityTable<Friend, 'id'>;
-};
-db.version(1).stores({
-    friends: '++id, age',
-});
+class Database extends Dexie {
+    cards!: EntityTable<Card, "id">;
+    constructor() {
+        super("CardDb");
+        // this.db = new Dexie("CardDb") as Dexie & {
+        //     // @ts-ignore
+        // };
 
-// Component:
-export function MyDexieReactComponent() {
-    const youngFriends = useLiveQuery(() =>
-        db.friends
-            .where('age')
-            .below(30)
-            .toArray()
-    );
+        this.version(1).stores({
+            // tables (++id to automatically increment)
+            cards: "id, value, color, isActive"
+        })
+    }
 
-    return (
-        <>
-            <h3>My young friends</h3>
-            <ul>
-                {youngFriends?.map((f) => (
-                    <li key={f.id}>
-                        Name: {f.name}, Age: {f.age}
-                    </li>
-                ))}
-            </ul>
-            <button
-                onClick={() => {
-                    db.friends.add({ name: 'Alice', age: 21 });
-                }}
-            >
-                Add another friend
-            </button>
-        </>
-    );
+    deleteCard = (id: number) => {
+        this.cards.delete(id);
+    }
+
+    addCard = async (id: number, value: string, color: string, isActive: boolean) => {
+        try {
+            await this.cards.add({
+                id: id,
+                value: value,
+                color: color,
+                isActive: isActive
+            });
+        } catch (e) {
+            console.log("error: ", e);
+        }
+    }
+
+    updateCardActivity = (id: number, isActive: boolean) => {
+        this.cards.update(id, {
+            isActive: isActive,
+        })
+    }
+
+    // getDb = () => {
+    //     // const cards = useLiveQuery(() => this.cards.toArray());
+    //     const cards = []
+    //
+    //     return cards;
+    // }
 }
+
+const db = new Database();
+
+export { db };

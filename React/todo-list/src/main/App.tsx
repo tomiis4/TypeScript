@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.scss'
 import Card from '../components/Card'
+import { db } from '../components/Db'
+import { useLiveQuery } from 'dexie-react-hooks'
 
 type Data = {
     value: string
@@ -17,14 +19,29 @@ function App() {
     const [data, setData] = useState<Data[]>([]);
     const [inputData, setInputData] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
+    const cards = useLiveQuery(() => db.cards.toArray());
 
-    // useEffect(() => { }, [data])
+    // updateCardActivity
+    // addCard
+    // deleteCard
+    // getCards
 
+    useEffect(() => {
+        if (data.length == 0 && cards) {
+            setData(cards);
+        }
+
+    }, [cards])
 
     const addHandler = () => {
+        const color = randomColor();
+        const id = data.length
+
+        db.addCard(id, inputData, color, true);
+
         setData([...data, {
             value: inputData,
-            id: data.length,
+            id: id,
             color: randomColor(),
             isActive: true
         }]);
@@ -41,10 +58,15 @@ function App() {
             }
 
             return item;
-        }))
+        }));
+
+        db.updateCardActivity(id, isActive);
     }
 
-    const deleteItem = (id: number) => { setData(prevData => prevData.filter(item => item.id !== id)); }
+    const deleteItem = (id: number) => { 
+        setData(prevData => prevData.filter(item => item.id !== id)); 
+        db.deleteCard(id);
+    }
 
     return (
         <>
@@ -65,6 +87,7 @@ function App() {
                             color={a.color}
                             id={a.id}
                             key={a.id}
+                            isActive={a.isActive}
                             deleteCallback={deleteItem}
                             activityCallback={updateActivity}
                         />
