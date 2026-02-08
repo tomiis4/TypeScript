@@ -71,7 +71,7 @@ function App() {
             </div>
             <div className={"cards"}>
                 {
-                    data.map(a => {
+                    [...data].reverse().map(a => {
                         return <Card
                             value={a.value}
                             color={a.color}

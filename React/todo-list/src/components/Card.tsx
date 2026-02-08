@@ -10,24 +10,31 @@ interface Props extends CardType {
 
 const Card = ({ id, value, color, isActive, deleteCallback, activityCallback }: Props) => {
     const [isActiveClass, setIsActiveClass] = useState(isActive);
+    const [isDeleted, setIsDeleted] = useState("");
 
     const activeHandler = () => {
         activityCallback(id, !isActiveClass);
         setIsActiveClass(!isActiveClass);
     }
 
+    const deleteHandler = (e: any) => {
+        // setIsDeleted(" delete")
+
+        // setTimeout(() => {
+            e.stopPropagation();
+            deleteCallback(id);
+        // }, 400)
+    }
+
     return <>
-        <div className={isActiveClass ? "card" : "card not-active"} onClick={activeHandler}>
+        <div className={isActiveClass ? "card" : "card not-active" + isDeleted} onClick={activeHandler}>
             <div className={"clr"} style={{ background: color }} />
             <h3> <span>{value}</span> </h3>
             <IoMdCloseCircleOutline
                 color={"#ECEFC8"}
                 fontSize={"35px"}
                 className={"ico"}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    deleteCallback(id);
-                }}
+                onClick={(e) => deleteHandler(e)}
             />
         </div>
     </>;

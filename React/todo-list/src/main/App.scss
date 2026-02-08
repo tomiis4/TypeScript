@@ -24,6 +24,14 @@ input[type=text] {
   padding-left: 20px;
   background: index.$secondary-10;
   color: index.$text;
+
+  &::placeholder {
+    font-style: italic;
+  }
+
+  &:focus{
+    border: 2px solid index.$accent;
+  }
 }
 
 input[type=button] {

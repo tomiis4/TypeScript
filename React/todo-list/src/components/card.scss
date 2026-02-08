@@ -14,6 +14,8 @@
   display: flex;
   align-items: center;
 
+  animation: 500ms ease-in display-anim;
+
   .clr {
     height: 80%;
     width: 3%;
@@ -29,6 +31,22 @@
   .ico {
     margin-left: auto;
     margin-right: 15px;
+  }
+}
+
+.delete {
+  transition: 0;
+  margin-top: -88px;
+  opacity: 0;
+}
+
+@keyframes display-anim {
+  0% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
