@@ -1,3 +1,6 @@
 [submodule "React/portfolio-2024"]
 	path = React/portfolio-2024
 	url = https://github.com/tomiis4/portfolio-2024.git
+[submodule "React/my-flow"]
+	path = React/my-flow
+	url = https://github.com/tomiis4/my-flow.git
